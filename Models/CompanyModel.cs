@@ -1,12 +1,15 @@
-﻿namespace Invoice.Models
+﻿using Microsoft.Extensions.Hosting;
+
+namespace Invoice.Models
 {
     public class CompanyModel
     {
-            public int ID { get; set; }
             public string? Id { get; set; }  
             public string? Name { get; set; }
-            public string? Password { get; set; }
-            public List<string>? Users { get; set; }
-        
+            public string? UsersId { get; set; }
+            public ICollection<UsersModel> Users { get; }
+
+            public string InvoiceId { get; set; }
+            public InvoiceModel Invoice { get; set; }   
     }
 }

@@ -35,7 +35,7 @@ namespace Invoice.Controllers
             return NotFound("User not found");
         }
 
-        private string Generate(CompanyModel company)
+        private string Generate(UsersModel company)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
@@ -55,13 +55,13 @@ namespace Invoice.Controllers
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        private CompanyModel Authenticate(CompanyLogin companyLogin)
+        private UsersModel Authenticate(CompanyLogin companyLogin)
         {
-            var currentCompany = CompanyConstants.Company.FirstOrDefault(o => o.Name.ToLower() == companyLogin.Companyname.ToLower() && o.Password == companyLogin.Password);
+            var currentUser = UserConstants.Company.FirstOrDefault(o => o.Name.ToLower() == companyLogin.UserName.ToLower() && o.Password == companyLogin.Password);
 
-            if (currentCompany != null)
+            if (currentUser != null)
             {
-                return currentCompany;
+                return currentUser;
             }
 
             return null;
